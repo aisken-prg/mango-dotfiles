@@ -1,0 +1,31 @@
+# Write wallpaper picker CSS to a temp file, clean up on exit
+WOFI_CSS="$(mktemp /tmp/wofi-wallpaper-XXXXXX.css)"
+trap 'rm -f "$WOFI_CSS"' EXIT
+
+cat > "$WOFI_CSS" << 'EOF'
+#window {
+    background-color: #1e1e2e;
+}
+
+#outer-box {
+    padding: 2px;
+}
+
+#entry {
+    padding: 1px;
+    margin: 1px;
+    border-radius: 4px;
+}
+
+#entry:selected {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+#text {
+    font-size:  0px;
+    min-height: 0px;
+    color:      transparent;
+    padding:    0px;
+    margin:     0px;
+}
+EOF
